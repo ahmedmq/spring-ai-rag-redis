@@ -21,13 +21,15 @@
         <h1>Spring AI RAG Postgres</h1>
         <p class="lead">This example is a quick exercise to illustrate how we can use Spring AI with RAG.</p>
         <form action="#" th:action="@{/load}" enctype="multipart/form-data" method="post"
-              class="row g-3 mb-3">
+              class="row g-3 mb-3" onsubmit="showSpinner('fileSubmitBtn','fileSpinner')">
             <div class="col-auto">
                 <label for="formFile" class="visually-hidden">Please select file to upload</label>
-                <input class="form-control" type="file" id="formFile" name="file">
+                <input class="form-control" type="file" id="formFile" name="file" required>
             </div>
             <div class="col-auto">
-                <button class="btn btn-sm btn-outline-success" type="submit">
+                <button id="fileSubmitBtn" class="btn btn-sm btn-outline-success" type="submit">
+                    <span id="fileSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                          style="display: none;"></span>
                     Upload File
                 </button>
             </div>
@@ -37,12 +39,21 @@
             <div th:text="${result}"/>
         </div>
 
-        <form action="#" th:action="@{/rag/chat}" method="get" class="form-inline mt-2 mt-md-0">
-            <label for="question" class="form-label">Please input your query</label>
-            <input class="w-50" type="text" id="question" th:name="question">
-            <button class="btn btn-sm btn-outline-success float-right" type="submit">
-                Ask
-            </button>
+        <form action="#" th:action="@{/rag/chat}" method="get" class="form-inline mt-2 mt-md-0"
+              onsubmit="showSpinner('askSubmitBtn','askSpinner')">
+            <div class="d-flex flex-row align-items-end">
+                <div class="col-8">
+                    <label for="question" class="form-label">Please input your query</label>
+                    <input class="form-control form-control-lg " type="text" id="question" th:name="question" required>
+                </div>
+                <div class="col">
+                    <button id="askSubmitBtn" class="btn btn-lg btn-outline-success" type="submit">
+                        <span id="askSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                              style="display: none;"></span>
+                        Ask
+                    </button>
+                </div>
+            </div>
         </form>
 
         <div class="alert alert-info" role="alert" th:if="${answer}">
@@ -50,6 +61,14 @@
         </div>
     </div>
 </main>
+
+<script>
+    function showSpinner(submitButtonId, spinnerId) {
+        console.log(111, 'came here');
+        document.getElementById(submitButtonId).disabled = true;
+        document.getElementById(spinnerId).style.display = 'inline-block';
+    }
+</script>
 
 <script src="/webjars/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
