@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring AI RAG</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/dist/css/bootstrap.min.css">
+    <!--    <link th:href="@{/main.css}" rel="stylesheet"/>-->
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">spring-ai-rag-redis</a>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="bg-light p-5 rounded mt-3">
+        <h1>Spring AI RAG Postgres</h1>
+        <p class="lead">This example is a quick exercise to illustrate how we can use Spring AI with RAG.</p>
+        <form action="#" th:action="@{/load}" enctype="multipart/form-data" method="post"
+              class="row g-3 mb-3">
+            <div class="col-auto">
+                <label for="formFile" class="visually-hidden">Please select file to upload</label>
+                <input class="form-control" type="file" id="formFile" name="file">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-sm btn-outline-success" type="submit">
+                    Upload File
+                </button>
+            </div>
+        </form>
+
+        <div class="alert alert-success m-2" role="alert" th:if="${result}">
+            <div th:text="${result}"/>
+        </div>
+
+        <form action="#" th:action="@{/rag/chat}" method="get" class="form-inline mt-2 mt-md-0">
+            <label for="question" class="form-label">Please input your query</label>
+            <input class="w-50" type="text" id="question" th:name="question">
+            <button class="btn btn-sm btn-outline-success float-right" type="submit">
+                Ask
+            </button>
+        </form>
+
+        <div class="alert alert-info" role="alert" th:if="${answer}">
+            <div th:text="${answer}"/>
+        </div>
+    </div>
+</main>
+
+<script src="/webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

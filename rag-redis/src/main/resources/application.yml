@@ -1,0 +1,10 @@
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+    vectorstore:
+      redis:
+        index: demo
+        prefix: "demo:"
+        initialize-schema: true
+
