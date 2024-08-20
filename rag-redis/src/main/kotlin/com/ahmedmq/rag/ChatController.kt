@@ -2,6 +2,8 @@ package com.ahmedmq.rag
 
 import org.springframework.ai.chat.client.ChatClient.Builder
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor
+import org.springframework.ai.chat.prompt.Prompt
+import org.springframework.ai.chat.prompt.PromptTemplate
 import org.springframework.ai.vectorstore.SearchRequest
 import org.springframework.ai.vectorstore.VectorStore
 import org.springframework.stereotype.Controller
@@ -39,8 +41,13 @@ class ChatController(
             .withTopK(2)
             .withSimilarityThreshold(0.7)
 
+        val prompt = """
+            Here is the question \n{question}\n
+            Please respond in only Japanese
+        """.trimIndent()
+
         val answer = chatClient.prompt()
-            .user(question)
+            .user { u -> u.text(prompt).param("question", question) }
             .advisors(QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
             .call()
             .content()
