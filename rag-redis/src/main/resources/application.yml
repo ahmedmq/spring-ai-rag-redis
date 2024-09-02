@@ -1,10 +1,28 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
   ai:
-    ollama:
-      base-url: http://localhost:11434
+    bedrock:
+      cohere:
+        embedding:
+          enabled: true
+          model: cohere.embed-multilingual-v3
+        chat:
+          enabled: false
+      aws:
+        region: ap-northeast-1
+      anthropic3:
+        chat:
+          enabled: true
+          model: anthropic.claude-3-haiku-20240307-v1:0
     vectorstore:
       redis:
         index: demo
         prefix: "demo:"
         initialize-schema: true
+#      pgvector:
+#        initialize-schema: true
+
 

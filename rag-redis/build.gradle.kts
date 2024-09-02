@@ -13,16 +13,17 @@ repositories {
     maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-extra["springAiVersion"] = "1.0.0-M1"
+extra["springAiVersion"] = "1.0.0-M2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.ai:spring-ai-ollama-spring-boot-starter")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.ai:spring-ai-redis-store-spring-boot-starter")
     implementation("org.springframework.ai:spring-ai-pdf-document-reader")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter")
+//    implementation("org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter")
     runtimeOnly("org.webjars:webjars-locator-core")
     runtimeOnly("org.webjars.npm:bootstrap:5.3.3")
     runtimeOnly("org.webjars.npm:popperjs__core:2.11.7")
